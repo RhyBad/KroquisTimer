@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Build" type="PythonConfigurationType" factoryName="Python">
     <module name="KroquisTimer" />
-    <option name="INTERPRETER_OPTIONS" value="-m PyInstaller --onefile --noconsole" />
+    <option name="INTERPRETER_OPTIONS" value="-m PyInstaller --onefile --noconsole main.spec" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
