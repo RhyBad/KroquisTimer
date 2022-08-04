@@ -2,15 +2,19 @@ import sys
 
 from PyQt5.QtWidgets import *
 
+from ui.MainWindow import MainWindow
 
-def __show_window():
+
+def btn_clicked():
+    QMessageBox.about(myWindow, "message", "clicked")
+
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    window = QWidget()
-    window.show()
+    myWindow = MainWindow()
+    myWindow.get_push_button().setText("Kronii!")
+    myWindow.get_push_button().clicked.connect(btn_clicked)
 
+    myWindow.show()
     app.exec_()
-
-
-if __name__ == '__main__':
-    __show_window()
