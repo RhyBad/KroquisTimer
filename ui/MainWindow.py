@@ -12,5 +12,15 @@ class MainWindow(QMainWindow, form):
         super().__init__()
         self.setupUi(self)
 
-    def get_push_button(self) -> QPushButton:
-        return self.pushButton
+    # region Buttons
+
+    def get_add_button(self) -> QPushButton:
+        return self.addButton
+
+    def get_delete_all_button(self) -> QPushButton:
+        return self.deleteAllButton
+
+    def get_run_button(self) -> QPushButton:
+        return self.runButton
+
+    # endregion
