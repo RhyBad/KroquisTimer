@@ -12,7 +12,7 @@ class MainWindow(QMainWindow, form):
         super().__init__()
         self.setupUi(self)
 
-    # region Buttons
+    # region Components
 
     def get_add_button(self) -> QPushButton:
         return self.addButton
@@ -22,5 +22,8 @@ class MainWindow(QMainWindow, form):
 
     def get_run_button(self) -> QPushButton:
         return self.runButton
+
+    def get_list_widget(self) -> QListWidget:
+        return self.listWidget
 
     # endregion

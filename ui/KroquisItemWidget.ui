@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>569</width>
+    <height>124</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="indexText">
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Adobe Devanagari</family>
+         <pointsize>36</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>1</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="previewImage">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Image</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTimeEdit" name="timeEdit">
+       <property name="currentSection">
+        <enum>QDateTimeEdit::MinuteSection</enum>
+       </property>
+       <property name="displayFormat">
+        <string>mm:ss</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
