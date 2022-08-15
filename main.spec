@@ -3,7 +3,10 @@
 
 block_cipher = None
 
-added_files = [ ('ui/MainWindow.ui', './ui/') ]
+added_files = [
+            ('./ui/*.ui', './ui/'),
+            ('./resource/*.*', './resource/')
+        ]
 
 a = Analysis(['main.py'],
              pathex=[],

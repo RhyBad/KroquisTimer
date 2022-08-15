@@ -5,12 +5,15 @@ from PyQt5.Qt import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
+from model.KroquisItem import KroquisItem
+
 ui_file_path = os.path.dirname(os.path.abspath(__file__)) + r"\KroquisItemWidget.ui"
 form = uic.loadUiType(ui_file_path)[0]
 
 
 class KroquisItemWidget(QWidget, form):
     def __init__(self):
+        self.file_path = ""
         self.pixmap = QPixmap()
 
         super().__init__()
@@ -20,6 +23,14 @@ class KroquisItemWidget(QWidget, form):
         self.pixmap.load(file_path)
         self.pixmap = self.pixmap.scaled(self.get_preview_image().size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.get_preview_image().setPixmap(self.pixmap)
+
+        self.file_path = file_path
+
+    def convert_to_kroquis_item(self) -> KroquisItem:
+        return KroquisItem(
+            time=self.get_time_edit().time().toPyTime(),
+            file_path=self.file_path
+        )
 
     # region Components
 
