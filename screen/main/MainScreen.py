@@ -24,10 +24,19 @@ class MainScreen:
         self.window.show()
 
     def button_add_clicked(self):
-        QMessageBox.about(self.window, "message", "Add Button Clicked")
+        self.viewBinder.add_item()
 
     def button_delete_all_clicked(self):
-        QMessageBox.about(self.window, "message", "Delete All Clicked")
+        deleted_item = self.viewBinder.delete_selected_item()
+        if deleted_item is None:
+            QMessageBox.about(self.window, "message", "Please select an item.")
 
     def button_run_clicked(self):
-        QMessageBox.about(self.window, "message", "Run Button Clicked")
+        QMessageBox.about(self.window, "message", self.__get_debug_data())
+
+    def __get_debug_data(self) -> str:
+        result = ""
+        item_list = self.viewBinder.get_kroquis_list()
+        for item in item_list:
+            result += "Path: " + item.file_path + "\n"
+        return result
