@@ -36,7 +36,7 @@ class KroquisItemWidget(QWidget, form):
         )
 
     def __open_image_file(self):
-        open_result = QFileDialog.getOpenFileName(self, 'Open image file', './')
+        open_result = QFileDialog.getOpenFileName(self, 'Open image file', './', 'Images (*.png *.jpg *.jpeg *.bmp)')
         file_path = open_result[0]
         self.load_image_from_file(file_path)
 
