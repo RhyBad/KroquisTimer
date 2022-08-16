@@ -6,6 +6,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 from model.KroquisItem import KroquisItem
+from util.click import click
 
 ui_file_path = os.path.dirname(os.path.abspath(__file__)) + r"\KroquisItemWidget.ui"
 form = uic.loadUiType(ui_file_path)[0]
@@ -19,6 +20,8 @@ class KroquisItemWidget(QWidget, form):
         super().__init__()
         self.setupUi(self)
 
+        click(self.get_preview_image()).connect(self.__open_image_file)
+
     def load_image_from_file(self, file_path: str):
         self.pixmap.load(file_path)
         self.pixmap = self.pixmap.scaled(self.get_preview_image().size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
@@ -31,6 +34,11 @@ class KroquisItemWidget(QWidget, form):
             time=self.get_time_edit().time().toPyTime(),
             file_path=self.file_path
         )
+
+    def __open_image_file(self):
+        open_result = QFileDialog.getOpenFileName(self, 'Open image file', './')
+        file_path = open_result[0]
+        self.load_image_from_file(file_path)
 
     # region Components
 
