@@ -30,8 +30,9 @@ class KroquisItemWidget(QWidget, form):
         self.file_path = file_path
 
     def convert_to_kroquis_item(self) -> KroquisItem:
+        q_time = self.get_time_edit().time()
         return KroquisItem(
-            time=self.get_time_edit().time().toPyTime(),
+            time=QTime(0, 0, 0).secsTo(q_time),
             file_path=self.file_path
         )
 

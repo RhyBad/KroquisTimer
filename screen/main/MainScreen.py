@@ -44,5 +44,5 @@ class MainScreen:
         result = ""
         item_list = self.viewBinder.get_kroquis_list()
         for item in item_list:
-            result += "Path: " + item.file_path + "\n"
+            result += "JSON: " + item.toJSON() + "\n"
         return result
