@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox
 
+from model.SaveData import SaveData
 from screen.main.KroquisListViewBinder import KroquisListViewBinder
 from screen.main.MainViewModel import MainViewModel
 from ui.MainWindow import MainWindow
@@ -39,6 +40,15 @@ class MainScreen:
     def save_data(self):
         print("Save data!")
         print(self.__get_debug_data())
+
+        save_data = SaveData()
+        save_data.kroquis_list = self.viewBinder.get_kroquis_list()
+
+        raw_data = save_data.toJSON()
+        print(raw_data)
+
+        parsed_data = SaveData.fromJSON(raw_data)
+        print(parsed_data)
 
     def __get_debug_data(self) -> str:
         result = ""
