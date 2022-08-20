@@ -1,5 +1,8 @@
 from PyQt5.QtCore import QObject, QEvent
-from skimage.viewer.qt import Signal
+from skimage.viewer.qt import Signal  # MUST FIND ALTERNATIVE TO MAKE QLABEL CLICKABLE
+
+
+# THIS MAKES FILE SIZE TOO MUCH BEEG!
 
 
 def click(widget):

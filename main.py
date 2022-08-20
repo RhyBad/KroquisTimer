@@ -9,5 +9,7 @@ if __name__ == "__main__":
 
     mainScreen = MainScreen()
 
+    # Debug
+
     mainScreen.show()
     app.exec_()

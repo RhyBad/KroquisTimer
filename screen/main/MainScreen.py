@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import QMessageBox
 
-from model.SaveData import SaveData
 from screen.main.KroquisListViewBinder import KroquisListViewBinder
 from screen.main.MainViewModel import MainViewModel
 from ui.MainWindow import MainWindow
@@ -19,7 +18,7 @@ class MainScreen:
         self.window.get_delete_all_button().clicked.connect(self.button_delete_all_clicked)
         self.window.get_run_button().clicked.connect(self.button_run_clicked)
 
-        self.window.observe_close_event(self.save_data)
+        self.window.observe_close_event(self._on_window_close)
 
     def show(self):
         self.viewModel.load_data()
@@ -37,18 +36,9 @@ class MainScreen:
     def button_run_clicked(self):
         QMessageBox.about(self.window, "message", self.__get_debug_data())
 
-    def save_data(self):
-        print("Save data!")
-        print(self.__get_debug_data())
-
-        save_data = SaveData()
-        save_data.kroquis_list = self.viewBinder.get_kroquis_list()
-
-        raw_data = save_data.toJSON()
-        print(raw_data)
-
-        parsed_data = SaveData.fromJSON(raw_data)
-        print(parsed_data)
+    def _on_window_close(self):
+        kroquis_item_list = self.viewBinder.get_kroquis_list()
+        self.viewModel.save_data(kroquis_item_list)
 
     def __get_debug_data(self) -> str:
         result = ""
