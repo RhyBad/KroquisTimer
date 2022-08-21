@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import *
 from common.Constants import Constants
 
 
-class KroquisViewer(QWidget):
+class KroquisViewerWidget(QWidget):
     _sizeHint = QSize()
 
     pixmap: QPixmap = None
