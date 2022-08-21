@@ -2,10 +2,10 @@ import os
 
 from PyQt5 import uic
 from PyQt5.Qt import *
-from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 from model.KroquisItem import KroquisItem
+from util.ImageLoader import ImageLoader
 from util.click import click
 
 ui_file_path = os.path.dirname(os.path.abspath(__file__)) + r"\KroquisItemWidget.ui"
@@ -15,7 +15,6 @@ form = uic.loadUiType(ui_file_path)[0]
 class KroquisItemWidget(QWidget, form):
     def __init__(self):
         self.file_path = ""
-        self.pixmap = QPixmap()
 
         super().__init__()
         self.setupUi(self)
@@ -23,9 +22,7 @@ class KroquisItemWidget(QWidget, form):
         click(self.get_preview_image()).connect(self.__open_image_file)
 
     def load_image_from_file(self, file_path: str):
-        self.pixmap.load(file_path)
-        self.pixmap = self.pixmap.scaled(self.get_preview_image().size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
-        self.get_preview_image().setPixmap(self.pixmap)
+        ImageLoader.load_image(self.get_preview_image(), file_path)
 
         self.file_path = file_path
 

@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 from screen.main.KroquisListViewBinder import KroquisListViewBinder
 from screen.main.MainViewModel import MainViewModel
+from ui.KroquisWindow import KroquisWindow
 from ui.MainWindow import MainWindow
 
 
@@ -10,6 +11,8 @@ class MainScreen:
         self.window = MainWindow()
         self.viewBinder = KroquisListViewBinder(self.window.get_list_widget())
         self.viewModel = MainViewModel()
+
+        self.kroquis_window = KroquisWindow()
 
         self.__setup_ui()
 
@@ -34,7 +37,10 @@ class MainScreen:
             QMessageBox.about(self.window, "message", "Please select an item.")
 
     def button_run_clicked(self):
-        QMessageBox.about(self.window, "message", self.__get_debug_data())
+        kroquis_item = self.viewBinder.get_kroquis_list()[0]
+
+        self.kroquis_window.load_image(kroquis_item)
+        self.kroquis_window.show()
 
     def _on_window_close(self):
         kroquis_item_list = self.viewBinder.get_kroquis_list()

@@ -1,13 +1,8 @@
-import os
 from typing import List, Callable
 
 from model.KroquisItem import KroquisItem
 from model.SaveData import SaveData
 from util.SaveManager import SaveManager
-
-temp_image_file1 = os.path.dirname(os.path.abspath(__file__)) + r"\..\..\resource\sign.png"
-temp_image_file2 = os.path.dirname(os.path.abspath(__file__)) + r"\..\..\resource\wink.png"
-temp_image_file3 = os.path.dirname(os.path.abspath(__file__)) + r"\..\..\resource\character_sheet.jpg"
 
 
 class MainViewModel:
