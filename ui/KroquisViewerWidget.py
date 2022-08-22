@@ -15,7 +15,7 @@ class KroquisViewerWidget(QWidget):
 
     def __init__(self, pixmap=None):
         super().__init__()
-        self.setWindowTitle(Constants.app_name)
+        self.setWindowTitle(Constants.viewer_window_name)
         self.setWindowFlag(Qt.WindowCloseButtonHint, False)
         self.set_pixmap(pixmap)
 

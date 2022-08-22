@@ -4,6 +4,8 @@ from typing import Callable, List
 from PyQt5 import uic, QtGui
 from PyQt5.QtWidgets import *
 
+from common.Constants import Constants
+
 ui_file_path = os.path.dirname(os.path.abspath(__file__)) + r"\MainWindow.ui"
 form = uic.loadUiType(ui_file_path)[0]
 
@@ -14,6 +16,7 @@ class MainWindow(QMainWindow, form):
 
         super().__init__()
         self.setupUi(self)
+        self.setWindowTitle(Constants.main_window_name)
 
     def observe_close_event(self, callback: Callable[[], None]):
         self._close_event_observers.append(callback)

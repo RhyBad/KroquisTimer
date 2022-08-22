@@ -1,3 +1,5 @@
 class Constants:
     app_name = "KroquisTimer"
-    controller_name = "Controller"
+    main_window_name = app_name
+    controller_window_name = app_name + "- Controller"
+    viewer_window_name = app_name + "- Viewer"
