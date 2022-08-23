@@ -21,7 +21,7 @@ class ControllerScreen:
         self.__setup_ui()
 
     def show(self):
-        self.change_image(0)
+        self.__update_ui()
         self.widget.show()
         self.viewer.show()
 
@@ -35,29 +35,35 @@ class ControllerScreen:
         self.close_event_listener()
 
     def __on_previous_button_clicked(self):
-        self.change_image(self.current_item_index - 1)
+        self.__set_new_item_index(self.current_item_index - 1)
+        self.__update_ui()
 
     def __on_next_button_clicked(self):
-        self.change_image(self.current_item_index + 1)
+        self.__set_new_item_index(self.current_item_index + 1)
+        self.__update_ui()
 
     def set_kroquis_list(self, kroquis_list: List[KroquisItem]):
         self.item_list = kroquis_list
 
-    def change_image(self, index: int):
-        last_index = len(self.item_list) - 1
-        new_index = max(0, min(index, last_index))
-        self.current_item_index = new_index
+    def __set_new_item_index(self, index: int):
+        self.current_item_index = max(0, min(index, len(self.item_list) - 1))
 
+    def __update_ui(self):
+        self.__update_buttons()
+        self.__update_image()
+
+    def __update_buttons(self):
         # Update Buttons
         if self.current_item_index <= 0:
             self.widget.get_previous_button().setDisabled(True)
         else:
             self.widget.get_previous_button().setEnabled(True)
-        if self.current_item_index >= last_index:
+
+        if self.current_item_index >= (len(self.item_list) - 1):
             self.widget.get_next_button().setDisabled(True)
         else:
             self.widget.get_next_button().setEnabled(True)
 
-        # Update ImageViewer
+    def __update_image(self):
         item = self.item_list[self.current_item_index]
         self.viewer.set_pixmap(QPixmap(item.file_path))
