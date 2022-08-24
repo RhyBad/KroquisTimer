@@ -21,8 +21,7 @@ class KroquisListViewBinder:
 
     def add_kroquis_item(self, item: KroquisItem, insert_first: bool = False):
         item_widget = KroquisItemWidget()
-        item_widget.set_time(item.time)
-        item_widget.load_image_from_file(item.file_path)
+        item_widget.load(item)
 
         custom_widget_item = QListWidgetItem()
         custom_widget_item.setSizeHint(item_widget.sizeHint())

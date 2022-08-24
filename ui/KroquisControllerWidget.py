@@ -19,6 +19,11 @@ class KroquisControllerWidget(QWidget, form):
         self.setupUi(self)
         self.setWindowTitle(Constants.controller_window_name)
 
+        time_text_font = self.get_time_text().font()
+        time_text_font.setPointSize(100)
+        time_text_font.setBold(True)
+        self.get_time_text().setFont(time_text_font)
+
     # region Inner Function Overrides
 
     def closeEvent(self, event: QCloseEvent):

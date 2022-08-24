@@ -50,14 +50,13 @@ class ControllerScreen:
         self.__update_ui()
 
     def __on_timer_change(self):
-        timer_str = self.timer.get_elapsed_time()
-        self.widget.get_time_text().setText(timer_str)
-
-        progress_bar = self.widget.get_time_progress_bar()
-        progress_bar_range = progress_bar.maximum() - progress_bar.minimum()
-        percent = self.timer.get_progress_percentage()
-        percent_int = int(percent * progress_bar_range)
-        self.widget.get_time_progress_bar().setValue(percent_int)
+        if self.timer.get_elapsed_time() < self.timer.get_schedule_time():
+            self.__update_time_gui()
+        elif self.current_item_index < (len(self.item_list) - 1):
+            self.__on_next_button_clicked()
+        else:
+            self.__update_time_gui()
+            self.timer.stop()
 
     def set_kroquis_list(self, kroquis_list: List[KroquisItem]):
         self.item_list = kroquis_list
@@ -89,3 +88,14 @@ class ControllerScreen:
     def __update_timer(self):
         item_time = self.item_list[self.current_item_index].time
         self.timer.set_schedule_time(item_time * 1000)
+        self.__update_time_gui()
+
+    def __update_time_gui(self):
+        timer_str = self.timer.get_elapsed_time()
+        self.widget.get_time_text().setText(timer_str)
+
+        progress_bar = self.widget.get_time_progress_bar()
+        progress_bar_range = progress_bar.maximum() - progress_bar.minimum()
+        percent = self.timer.get_progress_percentage()
+        percent_int = int(percent * progress_bar_range)
+        self.widget.get_time_progress_bar().setValue(percent_int)

@@ -21,11 +21,15 @@ class KroquisItemWidget(QWidget, form):
 
         click(self.get_preview_image()).connect(self.__open_image_file)
 
-    def set_time(self, time: int):
+    def load(self, data: KroquisItem):
+        self.__set_time(data.time)
+        self.__load_image_from_file(data.file_path)
+
+    def __set_time(self, time: int):
         q_time = QTime(0, 0, 0).addSecs(time)
         self.get_time_edit().setTime(q_time)
 
-    def load_image_from_file(self, file_path: str):
+    def __load_image_from_file(self, file_path: str):
         ImageLoader.load_image(self.get_preview_image(), file_path)
 
         self.file_path = file_path
@@ -40,7 +44,7 @@ class KroquisItemWidget(QWidget, form):
     def __open_image_file(self):
         open_result = QFileDialog.getOpenFileName(self, 'Open image file', './', 'Images (*.png *.jpg *.jpeg *.bmp)')
         file_path = open_result[0]
-        self.load_image_from_file(file_path)
+        self.__load_image_from_file(file_path)
 
     # region Components
 
