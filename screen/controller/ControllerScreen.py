@@ -24,15 +24,17 @@ class ControllerScreen:
         self.__setup_ui()
 
     def show(self):
-        self.__update_ui()
+        self.__set_new_item_index(0)
         self.widget.show()
         self.viewer.show()
         self.timer.start()
+        self.__update_ui()
 
     def __setup_ui(self):
         self.widget.close_event_listener = self.__on_widget_close_event
         self.widget.get_previous_button().clicked.connect(self.__on_previous_button_clicked)
         self.widget.get_next_button().clicked.connect(self.__on_next_button_clicked)
+        self.widget.get_play_button().clicked.connect(self.__on_play_button_clicked)
 
         self.timer.on_change_listener = self.__on_timer_change
 
@@ -49,6 +51,20 @@ class ControllerScreen:
         self.__set_new_item_index(self.current_item_index + 1)
         self.__update_ui()
 
+    def __on_play_button_clicked(self):
+        if self.timer.is_running():
+            self.timer.pause()
+        else:
+            self.timer.start()
+
+        self.__update_play_button_gui()
+
+    def __update_play_button_gui(self):
+        if self.timer.is_running():
+            self.widget.get_play_button().setText("Pause")
+        else:
+            self.widget.get_play_button().setText("Resume")
+
     def __on_timer_change(self):
         if self.timer.get_elapsed_time() < self.timer.get_schedule_time():
             self.__update_time_gui()
@@ -56,7 +72,8 @@ class ControllerScreen:
             self.__on_next_button_clicked()
         else:
             self.__update_time_gui()
-            self.timer.stop()
+            self.timer.pause()
+            self.__update_play_button_gui()
 
     def set_kroquis_list(self, kroquis_list: List[KroquisItem]):
         self.item_list = kroquis_list
@@ -68,6 +85,7 @@ class ControllerScreen:
         self.__update_buttons()
         self.__update_image()
         self.__update_timer()
+        self.__update_play_button_gui()
 
     def __update_buttons(self):
         # Update Buttons
@@ -91,7 +109,7 @@ class ControllerScreen:
         self.__update_time_gui()
 
     def __update_time_gui(self):
-        timer_str = self.timer.get_elapsed_time()
+        timer_str = self.timer.get_remaining_time()
         self.widget.get_time_text().setText(timer_str)
 
         progress_bar = self.widget.get_time_progress_bar()

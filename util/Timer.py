@@ -17,6 +17,9 @@ class Timer:
         self.__qtimer = QTimer(parent)
         self.__qtimer.timeout.connect(self.__on_every_msecs)
 
+    def is_running(self) -> bool:
+        return self.__is_running
+
     def start(self):
         if not self.__qtimer.isActive():
             self.__qtimer.start(int(self.interval_secs * 1000))
@@ -39,6 +42,10 @@ class Timer:
     def get_elapsed_time(self) -> str:
         return self.__get_time_string(self.__current_msecs)
 
+    def get_remaining_time(self) -> str:
+        remaining_msecs = self.__schedule_msecs - self.__current_msecs
+        return self.__get_time_string(remaining_msecs)
+
     def get_progress_percentage(self) -> float:
         if self.__schedule_msecs == 0:
             return 0
@@ -46,7 +53,7 @@ class Timer:
         return self.__current_msecs / self.__schedule_msecs
 
     def __on_every_msecs(self):
-        if self.__is_running:
+        if self.is_running():
             self.__current_msecs += self.interval_secs * 1000
             self.on_change_listener()
 
