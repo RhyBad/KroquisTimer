@@ -21,6 +21,10 @@ class KroquisItemWidget(QWidget, form):
 
         click(self.get_preview_image()).connect(self.__open_image_file)
 
+    def set_time(self, time: int):
+        q_time = QTime(0, 0, 0).addSecs(time)
+        self.get_time_edit().setTime(q_time)
+
     def load_image_from_file(self, file_path: str):
         ImageLoader.load_image(self.get_preview_image(), file_path)
 

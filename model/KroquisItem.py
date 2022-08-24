@@ -7,7 +7,7 @@ from util.toJSON import SerializableObject
 
 class KroquisItem(SerializableObject):
     def __init__(self, time: int, file_path: str):
-        self.time = time
+        self.time: int = time  # sec
         self.file_path = file_path
 
     @staticmethod
