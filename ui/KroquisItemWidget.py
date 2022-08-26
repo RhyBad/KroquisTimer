@@ -30,9 +30,12 @@ class KroquisItemWidget(QWidget, form):
         self.get_time_edit().setTime(q_time)
 
     def __load_image_from_file(self, file_path: str):
-        ImageLoader.load_image(self.get_preview_image(), file_path)
-
-        self.file_path = file_path
+        if os.path.isfile(file_path):
+            ImageLoader.load_image(self.get_preview_image(), file_path)
+            self.file_path = file_path
+        else:
+            self.get_preview_image().setText("No Image")
+            self.file_path = ""
 
     def convert_to_kroquis_item(self) -> KroquisItem:
         q_time = self.get_time_edit().time()
@@ -47,9 +50,6 @@ class KroquisItemWidget(QWidget, form):
         self.__load_image_from_file(file_path)
 
     # region Components
-
-    def get_index_text(self) -> QLabel:
-        return self.indexText
 
     def get_preview_image(self) -> QLabel:
         return self.previewImage

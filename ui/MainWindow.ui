@@ -52,7 +52,7 @@
         <item row="0" column="1">
          <widget class="QPushButton" name="deleteAllButton">
           <property name="text">
-           <string>전체 제거</string>
+           <string>제거</string>
           </property>
          </widget>
         </item>

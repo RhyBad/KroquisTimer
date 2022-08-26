@@ -36,14 +36,19 @@ class MainScreen:
     def __on_button_delete_all_clicked(self):
         deleted_item = self.viewBinder.delete_selected_item()
         if deleted_item is None:
-            QMessageBox.about(self.window, "message", "Please select an item.")
+            QMessageBox.about(self.window, "message", "아이템 하나를 선택해 주세요.")
 
     def __on_button_run_clicked(self):
-        self.window.hide()
-
         item_list = self.viewBinder.get_kroquis_list()
+
+        if len(item_list) <= 0:
+            QMessageBox.about(self.window, "message", "아이템을 최소 하나 추가해주세요.")
+            return
+
         self.controller.set_kroquis_list(item_list)
         self.controller.show()
+
+        self.window.hide()
 
     def __on_window_close(self):
         kroquis_item_list = self.viewBinder.get_kroquis_list()

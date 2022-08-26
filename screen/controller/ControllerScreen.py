@@ -54,16 +54,16 @@ class ControllerScreen:
     def __on_play_button_clicked(self):
         if self.timer.is_running():
             self.timer.pause()
-        else:
+        elif self.timer.get_progress_percentage() < 1 or (self.current_item_index < (len(self.item_list) - 1)):
             self.timer.start()
 
         self.__update_play_button_gui()
 
     def __update_play_button_gui(self):
         if self.timer.is_running():
-            self.widget.get_play_button().setText("Pause")
+            self.widget.get_play_button().setText("일시정지")
         else:
-            self.widget.get_play_button().setText("Resume")
+            self.widget.get_play_button().setText("재개")
 
     def __on_timer_change(self):
         if self.timer.get_elapsed_time() < self.timer.get_schedule_time():
