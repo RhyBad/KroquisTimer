@@ -16,11 +16,13 @@ class SaveManager:
             f.write(json_data)
 
     def load(self) -> SaveData:
-        with open(self.save_file_path, 'r') as f:
-            raw_data = f.read()
+        if os.path.isfile(self.save_file_path):
+            with open(self.save_file_path, 'r') as f:
+                raw_data = f.read()
 
-        save_data = SaveData.fromJSON(raw_data)
-        return save_data
+            return SaveData.fromJSON(raw_data)
+        else:
+            return SaveData()
 
     @staticmethod
     def __get_executable_path() -> str:

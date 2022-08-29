@@ -42,7 +42,7 @@ class KroquisListViewBinder:
         return result
 
     def add_item(self):
-        new_item = KroquisItem(time=0, file_path="")
+        new_item = KroquisItem(time=60, file_path="")
         self.add_kroquis_item(new_item, insert_first=True)
 
     def delete_selected_item(self) -> Optional[QListWidgetItem]:

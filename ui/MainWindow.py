@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import *
 
 from common.Constants import Constants
 
-ui_file_path = os.path.dirname(os.path.abspath(__file__)) + r"\MainWindow.ui"
+ui_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "MainWindow.ui")
 form = uic.loadUiType(ui_file_path)[0]
 
 

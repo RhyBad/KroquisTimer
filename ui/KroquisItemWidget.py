@@ -8,7 +8,7 @@ from model.KroquisItem import KroquisItem
 from util.ImageLoader import ImageLoader
 from util.click import click
 
-ui_file_path = os.path.dirname(os.path.abspath(__file__)) + r"\KroquisItemWidget.ui"
+ui_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "KroquisItemWidget.ui")
 form = uic.loadUiType(ui_file_path)[0]
 
 
