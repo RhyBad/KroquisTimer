@@ -35,7 +35,7 @@ class KroquisItemWidget(QWidget, form):
             ImageLoader.load_image(self.get_preview_image(), file_path)
             self.file_path = file_path
         else:
-            self.get_preview_image().setText("No Image")
+            self.get_preview_image().setText("No Image\n(Click)")
             self.file_path = ""
 
     def convert_to_kroquis_item(self) -> KroquisItem:
