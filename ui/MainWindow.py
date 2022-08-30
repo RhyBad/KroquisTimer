@@ -1,16 +1,12 @@
-import os
-import sys
 from typing import Callable, List
 
 from PyQt5 import uic, QtGui
 from PyQt5.QtWidgets import *
 
 from common.Constants import Constants
+from ui.get_ui_file_path import get_ui_file_path
 
-# ui_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "MainWindow.ui")
-base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-ui_folder_path = os.path.join(base_path, "ui")
-ui_file_path = os.path.join(ui_folder_path, "MainWindow.ui")
+ui_file_path = get_ui_file_path("MainWindow.ui")
 form = uic.loadUiType(ui_file_path)[0]
 
 
