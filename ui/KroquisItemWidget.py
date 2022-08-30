@@ -1,4 +1,5 @@
 import os
+import sys
 
 from PyQt5 import uic
 from PyQt5.Qt import *
@@ -8,7 +9,10 @@ from model.KroquisItem import KroquisItem
 from util.ImageLoader import ImageLoader
 from util.click import click
 
-ui_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "KroquisItemWidget.ui")
+# ui_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "KroquisItemWidget.ui")
+base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+ui_folder_path = os.path.join(base_path, "ui")
+ui_file_path = os.path.join(ui_folder_path, "KroquisItemWidget.ui")
 form = uic.loadUiType(ui_file_path)[0]
 
 

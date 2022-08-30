@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Build" type="PythonConfigurationType" factoryName="Python">
+  <configuration default="false" name="Build_MAC" type="PythonConfigurationType" factoryName="Python">
     <module name="KroquisTimer" />
-    <option name="INTERPRETER_OPTIONS" value="-m PyInstaller --clean main.spec" />
+    <option name="INTERPRETER_OPTIONS" value="-m PyInstaller --clean build_mac.spec" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
