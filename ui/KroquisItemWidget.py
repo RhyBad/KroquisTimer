@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import *
 
 from model.KroquisItem import KroquisItem
 from ui.get_ui_file_path import get_ui_file_path
+from util.ImageBrowser import ImageBrowser
 from util.ImageLoader import ImageLoader
 from util.click import click
 
@@ -46,8 +47,7 @@ class KroquisItemWidget(QWidget, form):
         )
 
     def __open_image_file(self):
-        open_result = QFileDialog.getOpenFileName(self, 'Open image file', './', 'Images (*.png *.jpg *.jpeg *.bmp)')
-        file_path = open_result[0]
+        file_path = ImageBrowser.open(self)
         self.__load_image_from_file(file_path)
 
     # region Components
