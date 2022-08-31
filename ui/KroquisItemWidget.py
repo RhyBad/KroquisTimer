@@ -8,7 +8,6 @@ from model.KroquisItem import KroquisItem
 from ui.get_ui_file_path import get_ui_file_path
 from util.ImageBrowser import ImageBrowser
 from util.ImageLoader import ImageLoader
-from util.click import click
 
 ui_file_path = get_ui_file_path("KroquisItemWidget.ui")
 form = uic.loadUiType(ui_file_path)[0]
@@ -21,7 +20,7 @@ class KroquisItemWidget(QWidget, form):
         super().__init__()
         self.setupUi(self)
 
-        click(self.get_preview_image()).connect(self.__open_image_file)
+        self.get_preview_image().mousePressEvent = self.__open_image_file
 
     def load(self, data: KroquisItem):
         self.__set_time(data.time)
@@ -46,7 +45,7 @@ class KroquisItemWidget(QWidget, form):
             file_path=self.file_path
         )
 
-    def __open_image_file(self):
+    def __open_image_file(self, event):
         file_path = ImageBrowser.open(self)
         self.__load_image_from_file(file_path)
 
