@@ -19,6 +19,14 @@ class KroquisViewerWidget(QWidget):
         self.setWindowFlag(Qt.WindowCloseButtonHint, False)
         self.set_pixmap(pixmap)
 
+        self.__set_background_color_black()
+
+    def __set_background_color_black(self):
+        self.setAutoFillBackground(True)
+        palette = self.palette()
+        palette.setColor(self.backgroundRole(), Qt.black)
+        self.setPalette(palette)
+
     def update_scaled(self):
         if self.pixmap:
             self.scaled = self.pixmap.scaled(self.size(), self.ratio, self.transformation)

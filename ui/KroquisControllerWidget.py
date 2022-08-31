@@ -1,6 +1,7 @@
 from typing import Callable, Optional
 
 from PyQt5 import uic
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import *
 
@@ -18,11 +19,37 @@ class KroquisControllerWidget(QWidget, form):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle(Constants.controller_window_name)
+        self.__set_dark_theme()
 
         time_text_font = self.get_time_text().font()
         time_text_font.setPointSize(100)
         time_text_font.setBold(True)
         self.get_time_text().setFont(time_text_font)
+
+    def __set_dark_theme(self):
+        self.__set_text_color_white()
+        self.__set_background_color_black()
+
+        self.__set_button_color_dark(self.get_previous_button())
+        self.__set_button_color_dark(self.get_play_button())
+        self.__set_button_color_dark(self.get_next_button())
+
+    @staticmethod
+    def __set_button_color_dark(button: QPushButton):
+        new_font = button.font()
+        new_font.setBold(True)
+        button.setFont(new_font)
+
+        button.setStyleSheet("background-color : rgb(73, 69, 79); color : white")
+
+    def __set_text_color_white(self):
+        self.get_time_text().setStyleSheet("color : white")
+
+    def __set_background_color_black(self):
+        self.setAutoFillBackground(True)
+        palette = self.palette()
+        palette.setColor(self.backgroundRole(), Qt.black)
+        self.setPalette(palette)
 
     # region Inner Function Overrides
 
