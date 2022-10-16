@@ -16,7 +16,7 @@ jobs:
         include:
           - os: windows-latest
             spec-file : build_windows.spec
-          - os: windows-latest
+          - os: macos-latest
             spec-file: build_mac.spec
 
     runs-on: ${{ matrix.os }}
