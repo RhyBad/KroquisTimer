@@ -1,11 +1,11 @@
 from typing import Optional, Callable
 
-from PyQt5.QtCore import QTimer, QObject
+from PyQt5.QtCore import QTimer, QObject, Qt
 
 
 class Timer:
     time_format = '{:02d}:{:02d}'
-    interval_secs = 0.001
+    interval_secs = 0.01
 
     def __init__(self, parent: QObject):
         self.__is_running: bool = False
@@ -15,6 +15,7 @@ class Timer:
         self.on_change_listener: Optional[Callable[[], None]] = None
 
         self.__qtimer = QTimer(parent)
+        self.__qtimer.setTimerType(Qt.PreciseTimer)
         self.__qtimer.timeout.connect(self.__on_every_msecs)
 
     def is_running(self) -> bool:
