@@ -1,8 +1,7 @@
 from typing import List, Callable, Optional
 
-from PyQt5.QtGui import QPixmap
-
 from model.KroquisItem import KroquisItem
+from model.KroquisViewItem import KroquisViewItem
 from ui.KroquisControllerWidget import KroquisControllerWidget
 from ui.KroquisViewerWidget import KroquisViewerWidget
 from util.Timer import Timer
@@ -15,7 +14,7 @@ class ControllerScreen:
 
         self.timer = Timer(self.widget)
 
-        self.item_list: List[KroquisItem] = []
+        self.item_list: List[KroquisViewItem] = []
         self.current_item_index = 0
 
         self.close_event_listener: Optional[Callable[[], None]] = None
@@ -76,7 +75,7 @@ class ControllerScreen:
             self.__update_play_button_gui()
 
     def set_kroquis_list(self, kroquis_list: List[KroquisItem]):
-        self.item_list = kroquis_list
+        self.item_list = list(map(lambda x: KroquisViewItem(x), kroquis_list))
 
     def __set_new_item_index(self, index: int):
         self.current_item_index = max(0, min(index, len(self.item_list) - 1))
@@ -101,11 +100,11 @@ class ControllerScreen:
 
     def __update_image(self):
         item = self.item_list[self.current_item_index]
-        self.viewer.set_pixmap(QPixmap(item.file_path))
+        self.viewer.set_pixmap(item.get_pixmap())
 
     def __update_timer(self):
-        item_time = self.item_list[self.current_item_index].time
-        self.timer.set_schedule_time(item_time * 1000)
+        item = self.item_list[self.current_item_index]
+        self.timer.set_schedule_time(item.get_time() * 1000)
         self.__update_time_gui()
 
     def __update_time_gui(self):
