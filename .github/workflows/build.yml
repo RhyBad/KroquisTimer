@@ -34,7 +34,7 @@ jobs:
         shell: bash
       - name: Build app
         run: |
-          pyinstaller --clean {{ matrix.spec-file }}
+          pyinstaller --clean ${{ matrix.spec-file }}
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
