@@ -56,10 +56,3 @@ class MainScreen:
 
     def __on_controller_close(self):
         self.window.show()
-
-    def __get_debug_data(self) -> str:
-        result = ""
-        item_list = self.viewBinder.get_kroquis_list()
-        for item in item_list:
-            result += "JSON: " + item.toJSON() + "\n"
-        return result
