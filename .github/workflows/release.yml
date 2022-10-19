@@ -6,9 +6,6 @@ on:
       - "v*.*.*"
   workflow_dispatch:
 
-permissions:
-  contents: read|write
-
 jobs:
   Build:
     uses: ./.github/workflows/build.yml
