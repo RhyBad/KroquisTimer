@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  Build:
+    uses: ./.github/workflows/build.yml
+
+  Release:
+    name: Release
+
+    runs-on: ubuntu-latest
+    #environment: release
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download production artifacts
+        uses: actions/download-artifact@v3
+        id: download
+        with:
+          path: artifacts/
+      - name: Create Release page draft
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          draft: true
+          files: |
+            ${{ steps.download.outputs.download-path }}/**
+            LICENSE
