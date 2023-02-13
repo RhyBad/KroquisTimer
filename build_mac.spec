@@ -46,8 +46,18 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
 )
-app = BUNDLE(
+coll = COLLECT(
     exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='KroquisTimer.app'
+)
+app = BUNDLE(
+    coll,
     name='KroquisTimer.app',
     icon=None,
     bundle_identifier=None,
