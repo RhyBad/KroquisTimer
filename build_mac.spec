@@ -32,7 +32,6 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    exclude_binaries=True,
     name='KroquisTimer',
     debug=False,
     bootloader_ignore_signals=False,
