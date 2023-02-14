@@ -29,7 +29,7 @@ exe = EXE(
     pyz,
     a.scripts,
     a.binaries,
-    a.zipfiles,R
+    a.zipfiles,
     a.datas,
     [],
     exclude_binaries=True,
