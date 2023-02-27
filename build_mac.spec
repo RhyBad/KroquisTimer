@@ -9,7 +9,7 @@ added_files = [
 
 a = Analysis(
     ['main.py'],
-    pathex=['.'],
+    pathex=[],
     binaries=[],
     datas=added_files,
     hiddenimports=[],
@@ -20,7 +20,7 @@ a = Analysis(
     win_no_prefer_redirects=False,
     win_private_assemblies=False,
     cipher=block_cipher,
-    noarchive=False,
+    noarchive=True,
 )
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
@@ -42,41 +42,20 @@ exe = EXE(
     *[], **{'onefile': True}
 )
 
-app = BUNDLE(
+coll = COLLECT(
     exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    name='KroquisTimer',
+    *[], **{'onefile': True}
+)
+
+app = BUNDLE(
+    coll,
     name='KroquisTimer.app',
     icon=None,
-    bundle_identifier=None,
-    bundle_version='1.0',
-    info_plist={
-        'CFBundleShortVersionString': '1.0',
-        'CFBundleVersion': '1.0.0',
-    },
-    resources=[
-        ('./resource', 'resource')
-    ],
-    plist={
-        'NSHighResolutionCapable': True,
-    },
-    qt_plugins=[
-        ('./plugins', 'plugins'),
-    ],
-    qt_menu_nib=[
-        ('./qt_menu.nib', 'qt_menu.nib'),
-    ],
-    qt_frameworks=[
-        '/path/to/Qt/QtCore.framework',
-        '/path/to/Qt/QtGui.framework',
-        '/path/to/Qt/QtWidgets.framework',
-    ],
-    frameworks=[
-        '/path/to/System/Library/Frameworks/Quartz.framework',
-    ],
-    bundle_name='KroquisTimer',
-    bundle=False,
-    create_plist=False,
-    signature=None,
-    app_name='KroquisTimer',
-    app_version='1.0',
-    *[], **{}
+    bundle_identifier=None
 )
